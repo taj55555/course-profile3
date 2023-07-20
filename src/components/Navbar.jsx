@@ -1,83 +1,106 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from "react-router-dom";
 import logo from "../assets/Logo.png";
 
 const Navbar = () => {
+
+
+  const [isShown, setIsShown] = useState(false);
+  const buttonRef = useRef();
+
+  const handleClick = () => {
+    setIsShown(!isShown);
+  };
+
+  const handleClickOutside = (event) => {
+    if (buttonRef.current && !buttonRef.current.contains(event.target)) {
+      setIsShown(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
+
   return (
     <section>
-      <header>
-        <div className=" border-b-2 px-[15px] py-[20px] flex justify-between items-center ">
-          <div>
+     
+        <div className="w-full shadow-md border-b-2 px-[15px] fixed z-[9999] bg-white xl:px-[20px] py-[15px] flex justify-between items-center ">
+          <div className=" md:w-[20%]">
             <Link
               to=""
-              className=" text-[14px] flex  text-[#e50914] bg-transparent "
+              className=" text-[14px] flex items-center  text-[#e50914] bg-transparent "
             >
               <img
                 src={logo}
                 alt=""
-                className=" w-[30px] h-[30px] sm:w-[40px] sm:h-[40px] flex items-center"
+                className=" w-[30px] h-[30px] md:w-[50px] md:h-[50px] flex items-center"
               />
 
-              <span className="details border-l-[2px] font-[500] ml-[10px] pl-[15px] text-[#aaa] text-[1.2rem] ">
-                <span className="team-name  mb-[2px] ">Open Connect</span>
+              <span className=" w-full border-l-[2px] border-[#a56868] font-[500] md:font-[700] ml-[10px] pl-[15px] text-[#db6f6f] text-[0.8rem] md:text-[1rem] flex items-center ">
+                <span className="team-name">PROJECT PROFILE</span>
               </span>
             </Link>
           </div>
 
-          <div className="">
-            <ul className="site-navigation flex items-center text-[0.8rem] text-center ">
-              {/* <li className="hide-on-resize my-[4px] mx-[12px]">
-                <a
-                  data-cms-original-href="/peering/"
-                  data-i18n="peering-with-open-connect"
-                  href="/en_gb/peering/"
+          <div className=" md:w-[80%]">
+            <ul className="flex items-center text-[0.8rem] md:text-[1rem] md:gap-4 text-center ">
+             
+              <li className=" hidden md:block my-[4px] mx-[12px]">
+                <Link
+                  to=''
                 >
                   PEERING WITH OPEN CONNECT
-                </a>
+                </Link>
               </li>
 
-              <li className="hide-on-resize my-[4px] mx-[12px]">
-                <a
-                  data-cms-original-href="/appliances/"
-                  data-i18n="open-connect-appliances"
-                  href="/en_gb/appliances/"
+              <li className=" hidden md:block my-[4px] mx-[12px]">
+                <Link to=''
+                  
                 >
                   OPEN CONNECT APPLIANCES
-                </a>
+                </Link>
               </li>
 
-              <li className="hide-on-resize my-[4px] mx-[12px]">
-                <a
-                  data-cms-original-href="/deployment-guide/"
-                  data-i18n="deploying-embedded-appliances"
-                  href="/en_gb/deployment-guide/"
+              <li className=" hidden md:block my-[4px] mx-[12px]">
+                <Link
+                  to=''
                 >
                   DEPLOYING EMBEDDED APPLIANCES
-                </a>
+                </Link>
               </li>
 
-              <li className="hide-on-resize my-[4px] mx-[12px]">
-                <a
-                  data-cms-original-href="/partner-portal/"
-                  data-i18n="partner-portal"
-                  href="/en_gb/partner-portal/"
+              <li className=" hidden md:block my-[4px] mx-[12px]">
+                <Link
+                  to=''
                 >
                   PARTNER PORTAL
-                </a>
-              </li> */}
+                </Link>
+              </li>
 
-              {/* <li className="submenu-container hide-on-resize my-[4px] mx-[12px]">
+
+
+              <li className="block my-[4px] mx-[12px]">
+                {/* ______________________________________DeskTop Search_______________________________ */}
+
                 <input
-                  id="support-checkbox "
-                  className=" m-0 p-0 fixed top-[-5px] left-0"
+                  className=" hidden m-0 p-1 fixed top-[60px] sm:top-[70px] right-[1px] md:right-[20px] bg-gradient-to-r from-cyan-500 to-blue-500 md:w-[20%] w-full text-white pl-[10px] outline-none"
                 />
-                <label data-i18n="support" for="support-checkbox" className=" text-[.9rem] text-[#3e3f3e]">
+
+                {/* ______________________________________DeskTop Search End_______________________________ */}
+               
+                <label className=" hidden md:block text-[1.2rem] text-[#3e3f3e]">
                   SUPPORT
                 </label>
               
 
-                <div className="submenu block w-full h-0 mt-[70px] pr-[100px] text-center bg-[#E50914] fixed top-0 left-0 shadow-md ">
-                  <ul className=" w-full m-0">
+                <div className="hidden md:block w-full absolute sm:top-[190px] md:top-[80px] left-0 z-0">
+                  <ul className=" z-[400] p-3 w-full m-0 flex gap-8 items-center bg-[#141414] text-white justify-center">
                     <li>
                       <Link to=''
                        className=""
@@ -87,43 +110,40 @@ const Navbar = () => {
                     </li>
 
                     <li>
-                      <a
-                        data-cms-original-href="/contact/"
-                        data-i18n="contact-us"
-                        href="/en_gb/contact/"
+                      <Link
+                        to=''
                       >
                         CONTACT US
-                      </a>
+                      </Link>
                     </li>
 
                     <li>
-                      <a
-                        data-cms-original-href="/jobs/"
-                        data-i18n="jobs"
-                        href="/en_gb/jobs/"
+                      <Link
+                        to=''
                       >
                         JOBS
-                      </a>
+                      </Link>
                     </li>
 
                     <li>
-                      <a
-                        data-i18n="partner-help-center"
-                        href="https://openconnect.zendesk.com/"
-                        target="_blank"
+                      <Link
+                        to=''
                       >
                         PARTNER HELP CENTRE
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>
-              </li> */}
+              </li>
+
+
 
               <li>
-                <ul className=" flex items-center gap-[20px] text-[#3e3f3e]">
+                <ul className=" flex items-center gap-[20px] md:gap-[30px] xl:gap-[40px] text-[#3e3f3e]">
                   <li className=" flex items-center">
                     <Link to="" className="">
                       <svg
+                      className="md:w-[25px] md:h-[25px]"
                         height="20"
                         viewBox="0 0 24 24"
                         width="20"
@@ -178,8 +198,9 @@ const Navbar = () => {
                   </li> */}
 
                   <li className=" hidden items-center">
-                    <Link to="" className="search-button">
+                    <Link to="" className="search-button]">
                       <svg
+                     
                         xmlns="http://www.w3.org/2000/svg"
                         width="20"
                         height="20"
@@ -203,8 +224,9 @@ const Navbar = () => {
                   </li>
 
                   <li className="mobile-search">
-                    <Link to="" className="">
+                    <Link to="" className=" text-[400px]">
                       <svg
+                       className="md:w-[25px] md:h-[25px]"
                         xmlns="http://www.w3.org/2000/svg"
                         width="20"
                         height="20"
@@ -217,7 +239,7 @@ const Navbar = () => {
                     </Link>
                   </li>
 
-                  <li className="menu">
+                  <li className="menu md:hidden">
                     <Link to="">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -238,24 +260,29 @@ const Navbar = () => {
               </li>
             </ul>
 
+
+ {/* ----------------------------language manu-------------------------------------- */}
             <div className=" hidden text-white md:max-w-[550px] w-full pl-10 py-5 bg-slate-900 absolute top-[80px] right-[15px] sm:top-[90px]">
+
+
+             
               <h4 className=" text-[20px] font-bold ">Choose your language:</h4>
               <ul className="grid sm:grid-cols-2 gap-3 w-full mt-8">
-                <li>
+                <li className="hover:text-red-500">
                   <Link to=''
                   >
                     العربية
                   </Link>
                 </li>
 
-                <li>
+                <li className="hover:text-red-500">
                   <Link to=''
                   >
                     Deutsch
                   </Link>
                 </li>
 
-                <li>
+                <li className="hover:text-red-500">
                   <Link to=''
                     
                   >
@@ -263,7 +290,7 @@ const Navbar = () => {
                   </Link>
                 </li>
 
-                <li>
+                <li className="hover:text-red-500">
                   <Link
                     to=''
                   >
@@ -271,7 +298,7 @@ const Navbar = () => {
                   </Link>
                 </li>
 
-                <li>
+                <li className="hover:text-red-500">
                   <Link to=''
                    
                   >
@@ -279,7 +306,7 @@ const Navbar = () => {
                   </Link>
                 </li>
 
-                <li>
+                <li className="hover:text-red-500">
                   <Link
                    to=''
                   >
@@ -287,7 +314,7 @@ const Navbar = () => {
                   </Link>
                 </li>
 
-                <li>
+                <li className="hover:text-red-500">
                   <Link
                     to=''
                   >
@@ -295,7 +322,7 @@ const Navbar = () => {
                   </Link>
                 </li>
 
-                <li>
+                <li className="hover:text-red-500">
                   <Link to=''
                    
                   >
@@ -303,7 +330,7 @@ const Navbar = () => {
                   </Link>
                 </li>
 
-                <li>
+                <li className="hover:text-red-500">
                   <Link
                    to=''
                   >
@@ -311,7 +338,7 @@ const Navbar = () => {
                   </Link>
                 </li>
 
-                <li>
+                <li className="hover:text-red-500">
                   <Link
                     to=''
                   >
@@ -319,7 +346,7 @@ const Navbar = () => {
                   </Link>
                 </li>
 
-                <li>
+                <li className="hover:text-red-500">
                   <Link
                     to=''
                   >
@@ -327,7 +354,7 @@ const Navbar = () => {
                   </Link>
                 </li>
 
-                <li>
+                <li className="hover:text-red-500">
                   <Link
                     to=''
                   >
@@ -335,7 +362,7 @@ const Navbar = () => {
                   </Link>
                 </li>
 
-                <li>
+                <li className="hover:text-red-500">
                   <Link
                     to=''
                   >
@@ -343,14 +370,14 @@ const Navbar = () => {
                   </Link>
                 </li>
 
-                <li>
+                <li className="hover:text-red-500">
                   <Link to=''
                   >
                     Português (Brasil)
                   </Link>
                 </li>
 
-                <li>
+                <li className="hover:text-red-500">
                   <Link
                     to=''
                   >
@@ -358,7 +385,7 @@ const Navbar = () => {
                   </Link>
                 </li>
 
-                <li>
+                <li className="hover:text-red-500">
                   <Link
                     to=''
                   >
@@ -366,7 +393,7 @@ const Navbar = () => {
                   </Link>
                 </li>
 
-                <li>
+                <li className="hover:text-red-500">
                   <Link
                     to=''
                   >
@@ -374,7 +401,7 @@ const Navbar = () => {
                   </Link>
                 </li>
 
-                <li>
+                <li className="hover:text-red-500">
                   <Link
                     to=''
                   >
@@ -382,7 +409,7 @@ const Navbar = () => {
                   </Link>
                 </li>
 
-                <li>
+                <li className="hover:text-red-500">
                   <Link
                     to=''
                   >
@@ -390,98 +417,85 @@ const Navbar = () => {
                   </Link>
                 </li>
               </ul>
+              
             </div>
 
-            <div className="menu-dropdown" id="menu-dropdown">
-              <h4 data-i18n="menu">Menu</h4>
-              <ul className="browse">
-                <li>
-                  <a
-                    data-cms-original-href="/peering/"
-                    data-i18n="peering-with-open-connect"
-                    href="/en_gb/peering/"
+
+
+
+            <div className=" hidden text-white md:max-w-[550px] w-full px-10 py-5 bg-slate-900 absolute top-[80px] right-[15px] sm:top-[90px]">
+              <h4 className=" text-[1.5rem] font-bold mb-[30px]">Menu</h4>
+              <ul className=" grid grid-cols-2 gap-5 pb-[20px] border-b-[1px]">
+                <li className="hover:text-red-500">
+                  <Link to=''
+                   
                   >
                     PEERING WITH OPEN CONNECT
-                  </a>
+                  </Link>
                 </li>
 
-                <li>
-                  <a
-                    data-cms-original-href="/appliances/"
-                    data-i18n="open-connect-appliances"
-                    href="/en_gb/appliances/"
+                <li className="hover:text-red-500">
+                  <Link to=''
                   >
                     OPEN CONNECT APPLIANCES
-                  </a>
+                  </Link>
                 </li>
 
-                <li>
-                  <a
-                    data-cms-original-href="/deployment-guide/"
-                    data-i18n="deploying-embedded-appliances"
-                    href="/en_gb/deployment-guide/"
+                <li className="hover:text-red-500">
+                  <Link to=''
                   >
                     DEPLOYING EMBEDDED APPLIANCES
-                  </a>
+                  </Link>
                 </li>
 
-                <li>
-                  <a
-                    data-cms-original-href="/partner-portal/"
-                    data-i18n="partner-portal"
-                    href="/en_gb/partner-portal/"
+                <li className="hover:text-red-500">
+                  <Link
+                    to=''
                   >
                     PARTNER PORTAL
-                  </a>
+                  </Link>
                 </li>
               </ul>
 
-              <h4>Support</h4>
-              <ul className="browse">
-                <li>
-                  <a
-                    data-cms-original-href="/faq/"
-                    data-i18n="frequently-asked-questions"
-                    href="/en_gb/faq/"
+
+              <h4 className=" mt-5 text-[1.5rem] font-bold mb-[30px]">Support</h4>
+              <ul className="grid grid-cols-2 gap-5 pb-[20px]">
+                <li className="hover:text-red-500">
+                  <Link
+                    to=''
                   >
                     FREQUENTLY ASKED QUESTIONS
-                  </a>
+                  </Link>
                 </li>
 
-                <li>
-                  <a
-                    data-cms-original-href="/contact/"
-                    data-i18n="contact-us"
-                    href="/en_gb/contact/"
+                <li className="hover:text-red-500">
+                  <Link
+                   to=''
                   >
                     CONTACT US
-                  </a>
+                  </Link>
                 </li>
 
-                <li>
-                  <a
-                    data-cms-original-href="/jobs/"
-                    data-i18n="jobs"
-                    href="/en_gb/jobs/"
+                <li className="hover:text-red-500">
+                  <Link
+                   to=''
                   >
                     JOBS
-                  </a>
+                  </Link>
                 </li>
 
-                <li>
-                  <a
-                    data-i18n="partner-help-center"
-                    href="https://openconnect.zendesk.com/"
-                    target="_blank"
+                <li className="hover:text-red-500">
+                  <Link
+                   to=''
                   >
                     PARTNER HELP CENTRE
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
           </div>
         </div>
-      </header>
+      
     </section>
   );
 };
