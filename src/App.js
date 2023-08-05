@@ -1,7 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
 import Index from './router/Index';
 import 'bootstrap-icons/font/bootstrap-icons.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 function App() {

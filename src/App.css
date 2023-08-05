@@ -1,3 +1,72 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+
+
+
+.btn_bg{
+  background-color: #f3bd45 !important;
+}
+
+
+.employerCheck{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 16px;
+    font-weight: 700;
+  
+}
+.checkbox{
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.textarea{
+    width: 100%;
+    height: 180px;
+    resize: none;
+    outline: none;
+    padding: 15px;
+}
+
+
+
+  
+  .date-dropdown {
+    cursor: pointer;
+  }
+
+
+.PhoneInputInput{
+  padding: 8px;
+}
+
+.PhoneInputCountry{
+  padding: 8px;
+  border-bottom: gray !important;
+  background-color: beige;
+
+}
+
+
+
+.btnD{
+  background-color: beige;
+}
+.inputCoursesID{
+  padding: 7px;
+  background: transparent !important;
+  border: none;
+  
+}
+
+.btncoursesID{
+  padding: 8px;
+  outline: none;
+  border: 1px !important;
+  background-color: green;
+  color: white;
+  font-weight: 700;
+
+ 
+ 
+}
